@@ -1,0 +1,386 @@
+{
+  "run_id": "S1_08ddeb8c",
+  "scenario_id": "S1",
+  "scenario_name": "Genuine memory-bandwidth contention",
+  "seed": 42,
+  "data_source": "SIMULATION",
+  "timestamp": "2026-10-20T19:06:30.979068+00:00",
+  "schema_version": "1.0",
+  "design_id": "15fee8f0ee004e60",
+  "design_summary": "Design ID  : 15fee8f0ee004e60\nScenario   : S1\nSeed       : 42\nSuspects   : ['suspect_1']\nDoses      : ['baseline', 'low', 'medium', 'high']\nBlocks     : 4\nWindows    : 16\nWindow     : 0.1s warmup / 0.5s measure / 0.2s washout\nRank OK    : True\n  Rank note: Design matrix: 16 rows \u00d7 4 cols, rank=4 (full rank=4)",
+  "pilot_result": {
+    "icc": 0.6667698947527484,
+    "sigma_y_rel": 0.02680056944179827,
+    "mde_fraction": 0.023743670624152034,
+    "delta_eff": 0.05,
+    "notes": [
+      "Thresholds delta_eff=0.05, delta_eq=0.0125, kappa=0.25 are initial values from the AGRDA document. Freeze via freeze-config before confirmatory runs.",
+      "SIMULATION: ICC computed from 5 synthetic sessions x 4 windows (sigma_between=12.0, sigma_within=14.4)"
+    ]
+  },
+  "actuator_log": [
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.5,
+      "applied_setting": 0.5,
+      "readback_value": 0.5,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.2,
+      "applied_setting": 0.2,
+      "readback_value": 0.2,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.8,
+      "applied_setting": 0.8,
+      "readback_value": 0.8,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.0,
+      "applied_setting": 0.0,
+      "readback_value": 0.0,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.8,
+      "applied_setting": 0.8,
+      "readback_value": 0.8,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.5,
+      "applied_setting": 0.5,
+      "readback_value": 0.5,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.0,
+      "applied_setting": 0.0,
+      "readback_value": 0.0,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.2,
+      "applied_setting": 0.2,
+      "readback_value": 0.2,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.2,
+      "applied_setting": 0.2,
+      "readback_value": 0.2,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.8,
+      "applied_setting": 0.8,
+      "readback_value": 0.8,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.5,
+      "applied_setting": 0.5,
+      "readback_value": 0.5,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.0,
+      "applied_setting": 0.0,
+      "readback_value": 0.0,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.2,
+      "applied_setting": 0.2,
+      "readback_value": 0.2,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.5,
+      "applied_setting": 0.5,
+      "readback_value": 0.5,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.0,
+      "applied_setting": 0.0,
+      "readback_value": 0.0,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    },
+    {
+      "timestamp": "2026-10-20T19:06:29.650440+00:00",
+      "actuator_type": "simulation",
+      "target_name": "suspect_1",
+      "requested_dose": 0.8,
+      "applied_setting": 0.8,
+      "readback_value": 0.8,
+      "readback_matches": true,
+      "action": "apply",
+      "success": true,
+      "error": null,
+      "notes": [
+        "SIMULATION \u2013 no real system change"
+      ]
+    }
+  ],
+  "n_windows_total": 16,
+  "n_windows_excluded": 0,
+  "exclusion_log": [],
+  "estimation": {
+    "n_effects": 1,
+    "effects": [
+      {
+        "suspect": "suspect_1",
+        "dose_delta": 0.5,
+        "tau_hat": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "perm_p": 1.0
+      }
+    ]
+  },
+  "audit": {
+    "n_pass": 5,
+    "n_fail": 1,
+    "n_unresolved": 3,
+    "checks": [
+      {
+        "id": "C1",
+        "name": "Measurement Adequacy",
+        "status": "FAIL",
+        "reasons": [
+          "ICC=0.667 < minimum 0.70"
+        ],
+        "evidence": []
+      },
+      {
+        "id": "C2",
+        "name": "Intervention Strength",
+        "status": "PASS",
+        "reasons": [],
+        "evidence": [
+          "Suspect BW reduction=0.750, mediator effect=0.180 \u2014 first stage adequate"
+        ]
+      },
+      {
+        "id": "C3",
+        "name": "Placebo Actuation",
+        "status": "PASS",
+        "reasons": [],
+        "evidence": [
+          "Victim placebo effect 0.0040 <= Delta_eq=0.0125; consistent with no direct non-memory pathway from actuation"
+        ]
+      },
+      {
+        "id": "C4",
+        "name": "Sentinel / Negative Control",
+        "status": "PASS",
+        "reasons": [],
+        "evidence": [
+          "Neg sentinel effect=0.0030 <= Delta_eq; Pos sentinel effect=0.2200 > Delta_eff"
+        ]
+      },
+      {
+        "id": "C5",
+        "name": "Alternative-Pathway Monitors",
+        "status": "UNRESOLVED",
+        "reasons": [
+          "No alternative-pathway monitors available on this platform"
+        ],
+        "evidence": []
+      },
+      {
+        "id": "C6",
+        "name": "Alternative-Actuator Consistency",
+        "status": "UNRESOLVED",
+        "reasons": [
+          "Two actuator types (MBA + CPU quota) not both available; ratio comparison not possible"
+        ],
+        "evidence": []
+      },
+      {
+        "id": "C7",
+        "name": "Dose-Response Consistency",
+        "status": "UNRESOLVED",
+        "reasons": [
+          "suspect_1: fewer than 2 dose levels; cannot assess trend",
+          "Insufficient data for dose-response check"
+        ],
+        "evidence": []
+      },
+      {
+        "id": "C8",
+        "name": "Carry-Over and Recovery",
+        "status": "PASS",
+        "reasons": [],
+        "evidence": [
+          "Washout residual 0.0060 <= Delta_eq=0.0125 \u2014 adequate recovery"
+        ]
+      },
+      {
+        "id": "C9",
+        "name": "Phase and Temporal-Dependence Balance",
+        "status": "PASS",
+        "reasons": [],
+        "evidence": [
+          "Dose-phase Spearman rho=-0.073 \u2014 no significant temporal confounding"
+        ]
+      }
+    ]
+  },
+  "decision": {
+    "outcome": "O1_inconclusive",
+    "tier": null,
+    "reason": "Design gate C1 (Measurement Adequacy) failed: ICC=0.667 < minimum 0.70",
+    "supported_claims": [],
+    "unsupported_claims": [
+      "No attribution claim (memory-specific or otherwise) is supported",
+      "Experiment must be redesigned or re-run before conclusions can be drawn"
+    ],
+    "trace": [
+      "Design gate C1 FAILED \u2014 O1 Inconclusive"
+    ]
+  },
+  "baselines": {},
+  "notes": [
+    "DATA SOURCE: SIMULATION \u2013 NOT A MEASURED RESULT",
+    "Scenario: S1 \u2013 Genuine memory-bandwidth contention"
+  ]
+}

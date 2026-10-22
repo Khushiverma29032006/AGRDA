@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agrda"
+version = "0.1.0"
+description = "Audit-Gated Randomized Dose Attribution of Memory-Subsystem Interference Among Co-located Containers"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+  {name = "AGRDA Research Prototype"},
+]
+keywords = ["containers", "memory", "attribution", "causal-inference", "performance"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3.11",
+  "Intended Audience :: Science/Research",
+]
+dependencies = [
+  "numpy>=1.23",
+  "scipy>=1.8",
+  "pandas>=1.4",
+  "matplotlib>=3.5",
+  "statsmodels>=0.13",
+  "psutil>=5.9",
+  "click>=8.0",
+  "rich>=12.0",
+  "tabulate>=0.9",
+]
+
+[project.scripts]
+agrda = "agrda.cli.main:cli"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov>=4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agrda*"]

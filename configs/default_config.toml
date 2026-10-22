@@ -1,0 +1,81 @@
+# AGRDA Default Configuration
+# Audit-Gated Randomized Dose Attribution of Memory-Subsystem Interference
+#
+# IMPORTANT: These are INITIAL configurable values from the AGRDA document.
+# They must be FROZEN (via freeze-config) before any confirmatory experiment.
+# Do NOT tune thresholds on confirmatory results.
+#
+# Version: 1.0
+# Status: UNFROZEN (pilot not yet run)
+
+[thresholds]
+# Delta_eff: relevance threshold (fraction of baseline throughput)
+# If the top-dose CI is wholly within (-delta_eff, +delta_eff), outcome = O2 Null.
+# Source: AGRDA document initial value.
+delta_eff = 0.05
+
+# Delta_eq: equivalence margin (fraction of baseline)
+# Used in C3 (placebo) and C4 (sentinel) checks.
+# Default: 25% of Delta_eff = 0.0125
+delta_eq = 0.0125
+
+# kappa: mediator-to-outcome ratio threshold
+# Used in C2 assessment only where denominator is meaningful.
+kappa = 0.25
+
+# ICC minimum for C1 (measurement adequacy)
+icc_min = 0.70
+
+# Minimum first-stage effect for C2 (intervention strength)
+first_stage_min = 0.10
+
+[window]
+# Window timing in seconds.
+# These are INITIAL values from the AGRDA document.
+# Replace with pilot settling-time results before confirmatory experiments.
+warmup_s = 10.0
+measure_s = 30.0
+washout_s = 20.0
+jitter_s = 2.0
+
+[design]
+# Number of randomized blocks per suspect (minimum 3, recommended >= 4)
+n_blocks = 4
+
+# Dose levels: [baseline, low, medium, high] as fractions [0, 1]
+doses = [0.0, 0.20, 0.50, 0.80]
+
+[safety]
+# Minimum suspect throughput as fraction of baseline (safety floor)
+min_throughput_fraction = 0.50
+
+# Watchdog heartbeat interval (seconds)
+watchdog_heartbeat_s = 0.5
+
+# Watchdog timeout before rollback (seconds)
+watchdog_timeout_s = 5.0
+
+# Maximum rollback completion time (seconds) — document requirement: 1s
+rollback_deadline_s = 1.0
+
+# Default to dry-run (no real actuation without explicit confirmation)
+dry_run = true
+
+[experiment]
+# Experiment mode: "simulation" | "real"
+# Real mode requires explicit operator confirmation and full capability check.
+mode = "simulation"
+
+# Seed for reproducibility (set before first run, never change after)
+seed = 42
+
+# Maximum total experiment duration (minutes)
+max_duration_minutes = 60
+
+[pilot]
+# Number of baseline windows for pilot calibration
+n_baseline_windows = 20
+
+# Target power and alpha for MDE calculation
+target_power = 0.80
+target_alpha = 0.05

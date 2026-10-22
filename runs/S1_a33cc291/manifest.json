@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "run_id": "S1_a33cc291",
+  "data_source": "SIMULATION",
+  "timestamp": "2026-10-21T19:34:54.711059+00:00",
+  "files": {
+    "run_record": "run_record.json",
+    "raw_measurements": "raw_measurements.csv",
+    "actuator_log": "actuator_log.csv",
+    "capability_report": "capability_report.json"
+  },
+  "checksums": {
+    "run_record.json": "62f316f6439f603b99459f618d9e4668944cd9e5d406d8496e8e6eccf245a15d",
+    "raw_measurements.csv": "5c5bcb8150e73d563c74f270027f5a8ab4d18a7aea79039fb4169ca6312b4b79",
+    "actuator_log.csv": "fe193aa2e16f9dab365d1f99dd3ee1e34eabef5b4dbdd7c947517e132fb1fabf",
+    "capability_report.json": "4e6eed0016fbf62b75694081e03b8688cfbdb7353e5a9f07fa4890583891ae1d"
+  }
+}

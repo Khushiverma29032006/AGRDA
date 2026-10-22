@@ -1,0 +1,253 @@
+Metadata-Version: 2.4
+Name: agrda
+Version: 0.1.0
+Summary: Audit-Gated Randomized Dose Attribution of Memory-Subsystem Interference Among Co-located Containers
+Author: AGRDA Research Prototype
+License: MIT
+Keywords: containers,memory,attribution,causal-inference,performance
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.23
+Requires-Dist: scipy>=1.8
+Requires-Dist: pandas>=1.4
+Requires-Dist: matplotlib>=3.5
+Requires-Dist: statsmodels>=0.13
+Requires-Dist: psutil>=5.9
+Requires-Dist: click>=8.0
+Requires-Dist: rich>=12.0
+Requires-Dist: tabulate>=0.9
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0; extra == "dev"
+
+# AGRDA — Audit-Gated Randomized Dose Attribution of Memory-Subsystem Interference Among Co-located Containers
+
+> **Research Prototype — B.Tech CSE Project**
+> **Status: Simulation / Demo Mode Only**
+> ⚠️ All results from this software are labelled **SIMULATION – NOT A MEASURED RESULT** until real Linux hardware experiments are conducted.
+
+---
+
+## What Is AGRDA?
+
+AGRDA tests whether an **audit-gated randomized intervention** method can reduce false memory-specific attribution of performance interference between co-located containers.
+
+It keeps three quantities **strictly separate**:
+
+| Quantity | What it is | How it is estimated |
+|---|---|---|
+| **Intervention effect** | Change in victim performance caused by randomly throttling a suspect | Randomized dose–response regression |
+| **Memory-mediated effect** | Portion attributable to the memory subsystem | Conditional interpretation via 9-check audit |
+| **Total contribution** | Suspect's contribution to existing degradation | Requires a justified extrapolation model |
+
+**Passing the audit means only *supported* memory-specific attribution — not proof that the exclusion restriction is true.**
+
+---
+
+## Platform Status
+
+| Feature | This host | Required for real experiments |
+|---|---|---|
+| OS | Windows 10 | Bare-metal Linux |
+| cgroup v2 | ❌ | ✅ Required |
+| Intel RDT / MBA | ❌ (i3-7020U) | ✅ Xeon/server CPU |
+| perf_event counters | ❌ | ✅ |
+| Docker / Podman | Detected at runtime | ✅ |
+| **Capability Level** | **SIMULATION_ONLY** | FULL_REAL |
+
+---
+
+## Quick Start
+
+### 1. Install dependencies
+
+```powershell
+pip install -e .
+```
+
+Or directly:
+
+```powershell
+pip install numpy scipy pandas matplotlib statsmodels psutil click rich tabulate
+```
+
+### 2. Check host capabilities (read-only)
+
+```powershell
+python -m agrda check-capabilities
+```
+
+### 3. List available scenarios
+
+```powershell
+python -m agrda list-scenarios
+```
+
+### 4. View a randomized design
+
+```powershell
+python -m agrda design --scenario S1 --seed 42 --blocks 4
+```
+
+### 5. Run a simulation scenario
+
+```powershell
+python -m agrda simulate --scenario S1 --seed 42
+python -m agrda simulate --scenario S0   # Null case
+python -m agrda simulate --scenario S4   # Frequency pathway violation
+python -m agrda simulate --scenario S6   # Carry-over detection
+```
+
+### 6. Run all tests
+
+```powershell
+python -m pytest tests/ -v
+```
+
+---
+
+## Project Structure
+
+```
+OS PROJECT/
+├── agrda/                      # Main package
+│   ├── capabilities/           # A. Read-only host capability detection
+│   │   ├── detector.py         # CapabilityDetector (never changes system)
+│   │   └── models.py           # OSType, CgroupVersion, RDTSupport, etc.
+│   ├── workloads/              # B. Workload management
+│   │   ├── models.py           # WorkloadRole, WorkloadProfile, WorkloadConfig
+│   │   ├── sim_backend.py      # Deterministic synthetic workload simulator
+│   │   └── manager.py          # WorkloadManager (interface adapter)
+│   ├── actuators/              # C. Actuator abstraction
+│   │   ├── interface.py        # ActuatorInterface (abstract)
+│   │   ├── sim_actuator.py     # SimActuator (in-memory, no system calls)
+│   │   └── watchdog.py         # Safety watchdog (rollback within 1s)
+│   ├── design/                 # E. Blocked randomized experiment design
+│   │   ├── models.py           # DoseLevel, WindowSpec, ExperimentDesign
+│   │   └── designer.py         # ExperimentDesigner (OAT, rank check)
+│   ├── telemetry/              # F. Measurement and telemetry
+│   │   ├── models.py           # MetricLabel, MeasurementRecord
+│   │   └── collector.py        # TelemetryCollector (simulation)
+│   ├── estimation/             # G. Effect estimation and statistics
+│   │   ├── estimator.py        # EffectEstimator (OLS + bootstrap + perm)
+│   │   └── pilot.py            # PilotCalibrator (sigma_Y, ICC, MDE)
+│   ├── audit/                  # H. Nine-check audit battery
+│   │   ├── models.py           # CheckResult, CheckStatus, AuditBatteryResult
+│   │   └── checks.py           # AuditBattery (C1–C9)
+│   ├── decision/               # I. Five-outcome decision policy
+│   │   └── policy.py           # DecisionPolicy (O1–O5)
+│   ├── scenarios/              # J. Simulation scenarios S0–S9
+│   │   └── definitions.py      # All ten scenario specs with ground truth
+│   ├── baselines/              # K. Baseline comparators B1–B4
+│   │   └── comparators.py      # B1-B4 + BaselineEvaluator + metrics
+│   ├── storage/                # L. Run data storage
+│   │   └── manager.py          # StorageManager (JSON + CSV)
+│   ├── reporting/              # Report generation
+│   │   └── generator.py        # ReportGenerator (watermarked text reports)
+│   ├── cli/                    # CLI entry points
+│   │   └── main.py             # click CLI (all commands)
+│   └── runner.py               # ExperimentRunner (full pipeline)
+├── tests/                      # Automated test suite
+│   ├── test_capabilities.py
+│   ├── test_actuators.py
+│   ├── test_design.py
+│   ├── test_audit.py
+│   ├── test_decision.py
+│   ├── test_estimation.py
+│   └── test_scenarios.py
+├── configs/
+│   └── default_config.toml     # Configurable thresholds (UNFROZEN)
+├── docs/
+│   └── ARCHITECTURE.md         # Architecture and design decisions
+├── runs/                       # Saved experiment runs (auto-created)
+└── pyproject.toml
+```
+
+---
+
+## Scenarios (S0–S9)
+
+| ID | Name | Expected Outcome | Tests |
+|----|------|-----------------|-------|
+| S0 | Null (no interference) | O2 Null | B1 false attribution |
+| S1 | Genuine memory-bandwidth contention | O4 Supported Attribution | Main case |
+| S2 | Multiple simultaneous interferers | O4 (OAT: interactions not identified) | Multi-suspect |
+| S3 | Workload-phase correlation | O2 Null (randomization breaks correlation) | B1 vs B3 |
+| S4 | CPU-frequency pathway | O3 Pathway Violation | C5 detection |
+| S5 | Cache and SMT interference | O5 Intervention Effect Only | C5 UNRESOLVED |
+| S6 | Carry-over (inadequate washout) | O1 Inconclusive | C8 FAIL |
+| S7 | Weak/noisy counters | O1 Inconclusive | C1 FAIL |
+| S8 | Nonlinearity/saturation | O4 + extrapolation flag | C7 saturation |
+| S9 | Injected exclusion-restriction violation | O3 Pathway Violation | C5 FAIL |
+
+---
+
+## Five-Outcome Policy (O1–O5)
+
+```
+O1 Inconclusive       ← Design gate fails, CI ambiguous, or required check fails
+O2 Null               ← CI wholly within (−Δ_eff, +Δ_eff)
+O3 Pathway Violation  ← Relevant effect + C3/C4/C5 FAIL
+O4 Supported Attribution
+    Tier 1: both actuators available (C6 PASS)
+    Tier 2: single actuator only (C6 UNRESOLVED)
+O5 Intervention Effect Only ← Relevant effect + gates pass + ≥1 check UNRESOLVED
+```
+
+**UNRESOLVED is never treated as PASS.**
+
+---
+
+## Research Traceability
+
+| Document element | Module | Test |
+|---|---|---|
+| D1 (separate estimands) | `estimation/estimator.py` | `test_estimation.py` |
+| D2 (conditional memory claim) | `decision/policy.py` | `test_decision.py` |
+| D3 (OS-actuator side effects) | `audit/checks.py` C5 | `test_audit.py::test_c5_*` |
+| D4 (FCR/FRR quantification) | `baselines/comparators.py` | `compare` CLI |
+| D5 (decision policy) | `decision/policy.py` | `test_decision.py` |
+| D6 (audit failure conditions) | `scenarios/` + `audit/` | `test_scenarios.py` |
+| C1–C9 | `audit/checks.py` | `test_audit.py` |
+| S0–S9 | `scenarios/definitions.py` | `test_scenarios.py` |
+| B1–B4 | `baselines/comparators.py` | `compare` CLI |
+
+---
+
+## Safety Rules
+
+1. **Default: dry_run=True** — no real actuator changes without `dry_run=False` + explicit confirmation.
+2. **Safety floor**: suspect throughput must stay ≥ 50% of baseline.
+3. **Watchdog**: rolls back all settings within 1 second on failure, exception, or timeout.
+4. **Never label simulation as real** — all synthetic results carry `SIMULATION` tag throughout storage, analysis, and reporting.
+5. **Real experiments**: require dedicated bare-metal Linux host, `check-capabilities` passing FULL_REAL, and explicit operator confirmation.
+
+---
+
+## Development Sequence
+
+- ✅ **Stage 1**: Scaffold + capabilities (read-only)
+- ✅ **Stage 2**: Simulation foundation (workloads, actuators, S0–S9)
+- ✅ **Stage 3**: Experiment design (blocked randomization, rank check)
+- ✅ **Stage 4**: Estimator + audit (C1–C9) + decision policy (O1–O5)
+- ✅ **Stage 5**: Baselines (B1–B4) + evaluation metrics
+- ✅ **Stage 6**: Real Linux adapter stubs (MBAActuator, CpuQuotaActuator, PerfTelemetryCollector, MBMTelemetryCollector) — *interface-complete, writes gated behind dry_run=False + Linux host*
+- ✅ **Stage 7**: Config loader, freeze-config CLI, analyze CLI, HostCapabilitySnapshot, ConfigThresholds models
+
+---
+
+## Limitations and Honest Caveats
+
+- **No real experiments have been conducted.** All results are synthetic.
+- The simulation noise model does not capture real multiplexing artifacts, cache contention topology, or NUMA effects.
+- The audit battery outcome on simulation data tells you the methodology works *as designed* — not that it works on real hardware.
+- The i3-7020U CPU does not support Intel RDT / MBA. Real hardware experiments require a supported Intel Xeon or high-end processor.
+- Interactions between suspects are NOT identified by the OAT design and are not reported.
+- Threshold values (Δ_eff = 5%, Δ_eq = 1.25%, κ = 0.25) are initial values from the document and must be frozen after pilot calibration.
+
+---
+
+*This software is a research prototype built for a B.Tech CSE course project. No experimental findings exist yet. No novelty claims are made.*
